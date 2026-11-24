@@ -1,14 +1,14 @@
-# Caderno da Pessoa 5 — `[A definir: Rafael Gomes / José Inácio / Alisson]` (Relatórios, Telas e Funções)
+# Caderno da Pessoa 5 — Rafael Gomes (Relatórios, Telas e Funções)
 
-**Auditor(a) Responsável:** `[Preencher Nome ao Escolher esta Frente]`  
+**Auditor Responsável:** Rafael Gomes  
 **Papel na Auditoria:** Auditoria de Relatórios, Interfaces (Telas), Confidencialidade Visual e Auditoria de Funções/Documentação  
 **Pontos sob sua Responsabilidade (3 PCs):**
 - **`PC04` (Grau de Risco: 4 – Forte · 4º):** Confidencialidade em Telas/Consultas (`/ui/admin` aberto, `/pedidos/acompanhar` e `PUT /api/clientes`)
 - **`PC07` (Grau de Risco: 4 – Forte · 7º):** Eficácia, Correção Contábil e Padronização dos Relatórios Emitidos e Telas (`DashboardStats`)
 - **`PC08` (Grau de Risco: 3 – Regular · 8º):** Auditoria de Funções (Segregação `isAdmin`) e Normas/Documentação do Sistema
 
-**Orçamento de Tempo:** **5h00** (Checklist das 14 telas e 4 relatórios: 2h00 | Entrevista rápida de satisfação com usuário/auditado junto à Duda P6: 1h00 | Redação dos 3 PCs para a Pessoa 7: 2h00)  
-**Prazo Interno para Entregar à Pessoa 7:** Hoje, até **17h00**
+**Orçamento de Tempo:** **5h00** (Checklist das 14 telas e 4 relatórios: 2h00 | Entrevista rápida de satisfação com usuário/auditado junto a Ana Júlia e Maria Eduarda — P6: 1h00 | Redação dos 3 PCs para José Inácio — P7: 2h00)  
+**Prazo Interno para Entregar a José Inácio de Moraes Santos (P7):** Hoje, até **17h00**
 
 ---
 
@@ -35,7 +35,7 @@ Use esta tabela (já extraída de todo o código `src/app/`) para cumprir os pas
 
 ---
 
-## 2. Modelo Pronto de Entrega para Enviar à Pessoa 7 até 17h00
+## 2. Modelo Pronto de Entrega para Enviar a José Inácio de Moraes Santos (Pessoa 7) até 17h00
 
 ### Ponto de Controle `PC04` — Confidencialidade de Telas, Painel `/ui/admin` e Privacidade/LGPD *(Grau de Risco: 4 – Forte)*
 - **Técnicas Aplicadas:** Análise de relatórios e telas (Slides 13–14, Deck 2), Simulação de acesso anônimo e Questionário (Q15, Q18).

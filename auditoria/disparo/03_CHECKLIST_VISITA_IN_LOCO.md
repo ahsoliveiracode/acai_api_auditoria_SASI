@@ -1,6 +1,6 @@
 # Formulário Oficial de Visita *In Loco* (5 Passos — Slide 9, *Técnicas de Auditoria*)
 
-**Auditora Responsável (Pessoa 2):** Ana Júlia Silveira *(Apoio opcional: Pessoa 5 ou Pessoa 6)*  
+**Auditoras Responsáveis (Pessoa 2):** Ana Júlia Silveira e Maria Eduarda Silveira  
 **Pontos de Controle Auditados:** `PC09` (Ambiente Físico — **Obrigatório**), `PC10` (Microinformática e Contingência) e `PC11` (Armazenamento e Backup)
 
 ---
@@ -8,7 +8,7 @@
 ## Passo 1 e Passo 3 — Agendamento e Identificação Formal da Visita
 - **Data e Hora Agendadas:** `24/11/2026 — Início: ___:___ | Término: ___:___`
 - **Local / Instalação Visitada:** `______________________________________________________________`
-- **Auditores Presentes (Nomes):** `Ana Júlia Silveira, __________________________________________`
+- **Auditores Presentes (Nomes):** `Ana Júlia Silveira, Maria Eduarda Silveira, ___________________`
 - **Pessoal de Sistemas/Operação Recebedor (Nomes e Funções):** `_________________________________`
 
 ---
@@ -49,8 +49,8 @@
 
 ---
 
-## Passo 5 — Emissão de Opinião Técnica da Visita (Para envio à Pessoa 7)
+## Passo 5 — Emissão de Opinião Técnica da Visita (Para envio a José Inácio de Moraes Santos — P7)
 - **Grau de Risco Consolidado:** `PC09 = ___` | `PC10 = ___` | `PC11 = ___`
-- **Parecer Sintético da Auditora de Campo (Pessoa 2):**
+- **Parecer Sintético das Auditoras de Campo (Pessoa 2):**
   `__________________________________________________________________________________________`
   `__________________________________________________________________________________________`

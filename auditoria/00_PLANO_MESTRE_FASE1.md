@@ -81,18 +81,18 @@ flowchart TD
 
 | Ordem | PC | Ponto de Controle Auditado | Parâmetro de Controle Interno | Responsável | Grau de Risco |
 | :---: | :---: | :--- | :--- | :--- | :---: |
-| **1º** | **PC01** | Controle de Acesso ao Teleprocessamento/APIs e Rotas Admin (`/api/*`, `/seed`, `/create-admin`) | Segurança Lógica | **P3 (`[A definir]`)** | **5 – Muito forte** |
-| **2º** | **PC02** | Programas de Cálculo e Crítica de Entrada de Pedidos (`valorTotal` enviado pelo cliente) | Fidelidade & Regras de Negócio | **P4 (Helen)** | **5 – Muito forte** |
-| **3º** | **PC03** | Rotinas de Atualização de Cupons Promocionais e Saldo de Fidelidade (`/coupons`, `/loyalty`) | Regras de Negócio & Segurança Lógica | **P4 (Helen)** | **5 – Muito forte** |
-| **4º** | **PC04** | Confidencialidade de Telas/Consultas (`/ui/admin` aberto, `/acompanhar` e `PUT /api/clientes`) | Confidencialidade & Legislação (LGPD) | **P5 (`[A definir]`)** | **4 – Forte** |
-| **5º** | **PC05** | Gestão de Passwords, Sessões JWT/OAuth e Segurança em Redes | Segurança Lógica & Confidencialidade | **P3 (`[A definir]`)** | **4 – Forte** |
-| **6º** | **PC06** | Fidelidade da Informação, *Audit Trail* (Logs), Arquivos de Erros e CI/CD (`github/`, `husky/`) | Fidelidade & Eficiência | **P4 (Helen)** | **4 – Forte** |
-| **7º** | **PC07** | Eficácia, Correção Contábil e Padronização de Relatórios e Telas (`DashboardStats` somando cancelados) | Eficácia & Fidelidade | **P5 (`[A definir]`)** | **4 – Forte** |
-| **8º** | **PC08** | Auditoria de Funções (Segregação `isAdmin`) e Normas/Documentação do Sistema | Políticas/Regras & Eficácia | **P5 (`[A definir]`)** | **3 – Regular** |
-| **9º** | **PC09** | Segurança Física e Ambiental do Centro de Computação / Local de Operação *(Obrigatório)* | Segurança Física | **P2 (Ana Júlia)** | **3 – Regular** |
-| **10º** | **PC10** | Ambiente de Microinformática, Terminais Operacionais e Plano de Contingência | Segurança Física & Eficiência | **P2 (Ana Júlia)** | **3 – Regular** |
-| **11º** | **PC11** | Armazenamento, Rotinas de Backup e Recuperação de Transações no Banco de Dados | Segurança Física/Lógica | **P2 (Ana Júlia)** | **3 – Regular** |
-| **12º** | **PC12** | Administração de SGBD, Unicidade do Dado, Dicionário e Eficiência de Arquivos | Eficiência & Segurança Lógica | **P3 (`[A definir]`)** | **2 – Fraco** |
+| **1º** | **PC01** | Controle de Acesso ao Teleprocessamento/APIs e Rotas Admin (`/api/*`, `/seed`, `/create-admin`) | Segurança Lógica | **P3 (Alisson de Souza Rocha)** | **5 – Muito forte** |
+| **2º** | **PC02** | Programas de Cálculo e Crítica de Entrada de Pedidos (`valorTotal` enviado pelo cliente) | Fidelidade & Regras de Negócio | **P4 (Helen Gonçalves)** | **5 – Muito forte** |
+| **3º** | **PC03** | Rotinas de Atualização de Cupons Promocionais e Saldo de Fidelidade (`/coupons`, `/loyalty`) | Regras de Negócio & Segurança Lógica | **P4 (Helen Gonçalves)** | **5 – Muito forte** |
+| **4º** | **PC04** | Confidencialidade de Telas/Consultas (`/ui/admin` aberto, `/acompanhar` e `PUT /api/clientes`) | Confidencialidade & Legislação (LGPD) | **P5 (Rafael Gomes)** | **4 – Forte** |
+| **5º** | **PC05** | Gestão de Passwords, Sessões JWT/OAuth e Segurança em Redes | Segurança Lógica & Confidencialidade | **P3 (Alisson de Souza Rocha)** | **4 – Forte** |
+| **6º** | **PC06** | Fidelidade da Informação, *Audit Trail* (Logs), Arquivos de Erros e CI/CD (`github/`, `husky/`) | Fidelidade & Eficiência | **P4 (Helen Gonçalves)** | **4 – Forte** |
+| **7º** | **PC07** | Eficácia, Correção Contábil e Padronização de Relatórios e Telas (`DashboardStats` somando cancelados) | Eficácia & Fidelidade | **P5 (Rafael Gomes)** | **4 – Forte** |
+| **8º** | **PC08** | Auditoria de Funções (Segregação `isAdmin`) e Normas/Documentação do Sistema | Políticas/Regras & Eficácia | **P5 (Rafael Gomes)** | **3 – Regular** |
+| **9º** | **PC09** | Segurança Física e Ambiental do Centro de Computação / Local de Operação *(Obrigatório)* | Segurança Física | **P2 (Ana Júlia Silveira e Maria Eduarda Silveira)** | **3 – Regular** |
+| **10º** | **PC10** | Ambiente de Microinformática, Terminais Operacionais e Plano de Contingência | Segurança Física & Eficiência | **P2 (Ana Júlia Silveira e Maria Eduarda Silveira)** | **3 – Regular** |
+| **11º** | **PC11** | Armazenamento, Rotinas de Backup e Recuperação de Transações no Banco de Dados | Segurança Física/Lógica | **P2 (Ana Júlia Silveira e Maria Eduarda Silveira)** | **3 – Regular** |
+| **12º** | **PC12** | Administração de SGBD, Unicidade do Dado, Dicionário e Eficiência de Arquivos | Eficiência & Segurança Lógica | **P3 (Alisson de Souza Rocha)** | **2 – Fraco** |
 
 ---
 
@@ -106,16 +106,14 @@ flowchart TD
 
 ---
 
-## 2. Programação da Equipe (7 Integrantes — Slides 20 e 21, Deck 3)
+## 2. Programação Oficial da Equipe (7 Integrantes — Slides 20 e 21, Deck 3)
 
-*(Membros em aberto para escolha das Pessoas 3, 5 e 7: **Rafael Gomes**, **José Inácio de Moraes Santos** e **Alisson de Souza Rocha**)*
-
-| Papel | Integrante | Responsabilidades e Entregas | Classificação Visita | Orçado | Real |
+| Papel | Integrante(s) | Responsabilidades e Entregas | Classificação Visita | Orçado | Real |
 | :---: | :--- | :--- | :--- | :---: | :---: |
-| **P1** | **Augusto Henrique** *(Confirmado)* | Líder, Planejamento, DFD, Supervisão/Revisão de Papéis, **Certificado de Controle Interno (3.2)** e **Relatório de Redução de Custos (3.3)** | Supervisão Geral | 5h00 | `____` |
-| **P2** | **Ana Júlia Silveira** *(Confirmada)* | **Ambiente Físico e Infra (`PC09`, `PC10`, `PC11`)**, condução da **Visita *in loco*** e perguntas de hardware/micros/backup | Visita *In Loco* #1 | 5h00 | `____` |
-| **P3** | **`[A definir]`** | **BD, Teleprocessamento e Redes (`PC01`, `PC05`, `PC12`)**, testes de controle de acesso às APIs, senhas/JWT e schema/arquivos | Técnica / Remota | 5h00 | `____` |
-| **P4** | **Helen Gonçalves** *(Confirmada)* | **Sistema em Operação e Testes (`PC02`, `PC03`, `PC06`)**, execução do **Test Deck** (5 situações) em cálculos, cupons, fidelidade e logs | Lab de Simulação | 5h00 | `____` |
-| **P5** | **`[A definir]`** | **Relatórios, Telas e Funções (`PC04`, `PC07`, `PC08`)**, análise das 14 telas e 4 relatórios, confidencialidade e segregação/docs | Visita/Usuários #2 | 5h00 | `____` |
-| **P6** | **Maria Eduarda Silveira** *(Confirmada)* | Consolidação e remessa dos **Questionários**, condução da **Entrevista + Ata** e **Pastas de Documentação (3.4/3.5)** | Reunião/Entrevista #1 | 5h00 | `____` |
-| **P7** | **`[A definir]`** | Compilação do **Relatório de Fraquezas (3.1)**, formatação final `GRUPO_X.pdf` (**máx. 20 páginas**) e **Slides Executivos (máx. 15 min)** | Consolidação/Design | 5h00 | `____` |
+| **P1** | **Augusto Henrique** | Líder, Planejamento, DFD, Supervisão/Revisão de Papéis, **Certificado de Controle Interno (3.2)** e **Relatório de Redução de Custos (3.3)** | Supervisão Geral | 5h00 | `____` |
+| **P2** | **Ana Júlia Silveira e Maria Eduarda Silveira** | **Ambiente Físico e Infra (`PC09`, `PC10`, `PC11`)**, condução da **Visita *in loco*** e perguntas de hardware/micros/backup | Visita *In Loco* #1 | 5h00 *(dupla)* | `____` |
+| **P3** | **Alisson de Souza Rocha** | **BD, Teleprocessamento e Redes (`PC01`, `PC05`, `PC12`)**, testes de controle de acesso às APIs, senhas/JWT e schema/arquivos | Técnica / Remota | 5h00 | `____` |
+| **P4** | **Helen Gonçalves** | **Sistema em Operação e Testes (`PC02`, `PC03`, `PC06`)**, execução do **Test Deck** (5 situações) em cálculos, cupons, fidelidade e logs | Lab de Simulação | 5h00 | `____` |
+| **P5** | **Rafael Gomes** | **Relatórios, Telas e Funções (`PC04`, `PC07`, `PC08`)**, análise das 14 telas e 4 relatórios, confidencialidade e segregação/docs | Visita/Usuários #2 | 5h00 | `____` |
+| **P6** | **Ana Júlia Silveira e Maria Eduarda Silveira** | Consolidação e remessa dos **Questionários**, condução da **Entrevista + Ata** e **Pastas de Documentação (3.4/3.5)** | Reunião/Entrevista #1 | 5h00 *(dupla)* | `____` |
+| **P7** | **José Inácio de Moraes Santos** | Compilação do **Relatório de Fraquezas (3.1)**, formatação final `GRUPO_X.pdf` (**máx. 20 páginas**) e **Slides Executivos (máx. 15 min)** | Consolidação/Design | 5h00 | `____` |

@@ -1,9 +1,8 @@
-# Caderno da Pessoa 6 — Maria Eduarda Silveira / Duda (Entrevistas, Questionários e Pastas de Documentação)
+# Caderno da Pessoa 6 — Ana Júlia Silveira e Maria Eduarda Silveira (Entrevistas, Questionários e Pastas de Documentação)
 
-**Auditora Responsável:** Maria Eduarda Silveira *(Confirmada)*  
-**Papel na Auditoria:** Coordenadora de Comunicação com o Auditado, Entrevista/Ata e Guardiã dos Produtos **3.4 (Manual de Auditoria)** e **3.5 (Pastas de Documentação da Auditoria)**  
-**Orçamento de Tempo:** **5h00** (Disparo do Ofício + Questionário: 45 min | Condução da Entrevista + Redação da Ata: 1h45 | Tabulação das Respostas: 1h00 | Organização das Pastas de Documentação para P7: 1h30)  
-**Prazo Interno para Entregar à Pessoa 7:** Hoje, até **17h00**
+**Auditoras Responsáveis (em dupla — P2/P6):** Ana Júlia Silveira e Maria Eduarda Silveira  
+**Papel na Auditoria:** Coordenação de Comunicação com o Auditado, Entrevista/Ata e Guardiãs dos Produtos **3.4 (Manual de Auditoria)** e **3.5 (Pastas de Documentação da Auditoria)**  
+**Orçamento de Tempo:** **5h00 (em dupla)** | **Prazo Interno para Entregar a José Inácio de Moraes Santos (P7):** Hoje, até **17h00**
 
 ---
 
@@ -11,10 +10,10 @@
 
 1. **Disparo Externo Imediato (Passo 5 do Slide 6, Deck 2):**
    - Enviar ao grupo *Açaí do Vale* o `auditoria/disparo/01_OFICIO_SOLICITACAO_ACESSO_E_DOCS.md` junto com o `02_QUESTIONARIO_CONTROLES_INTERNOS.md` e anotar o horário exato de remessa e de recebimento.
-2. **Meio do Dia — Entrevista + Ata da Reunião (Passos 1 a 7 do Slide 12, Deck 2):**
-   - Conduzir a reunião de 20 minutos usando `auditoria/disparo/04_ATA_ENTREVISTA_AMBIENTE_COMPUTACIONAL.md`, preencher a Ata com nomes, horários e declarações dos colegas auditados e compartilhar imediatamente as respostas com Ana Júlia (P2), Pessoa 3, Helen (P4) e Pessoa 5.
-3. **Até 17h00 — Entregar à Pessoa 7 os quadros consolidados da Pasta de Documentação (Produto 3.5 — Slide 25, Deck 3):**
-   - O Slide 25 exige: **relação de programas, relação de arquivos do sistema, relação de relatórios e telas, fluxos e atas de reunião**. As três relações técnicas já estão **100% levantadas abaixo** para você revisar e entregar prontas!
+2. **Entrevista + Ata da Reunião (Passos 1 a 7 do Slide 12, Deck 2):**
+   - Conduzir a reunião de 20 minutos usando `auditoria/disparo/04_ATA_ENTREVISTA_AMBIENTE_COMPUTACIONAL.md`, preencher a Ata com nomes, horários e declarações dos colegas auditados e compartilhar imediatamente as respostas com Alisson (P3), Helen (P4) e Rafael (P5).
+3. **Até 17h00 — Entregar a José Inácio de Moraes Santos (P7) os quadros consolidados da Pasta de Documentação (Produto 3.5 — Slide 25, Deck 3):**
+   - O Slide 25 exige: **relação de programas, relação de arquivos do sistema, relação de relatórios e telas, fluxos e atas de reunião**. As três relações técnicas já estão **100% levantadas abaixo** para vocês revisarem e entregarem prontas!
 
 ---
 

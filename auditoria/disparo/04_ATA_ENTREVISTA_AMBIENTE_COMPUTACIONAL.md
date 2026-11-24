@@ -1,6 +1,6 @@
 # Roteiro e Ata de Entrevista no Ambiente Computacional (7 Passos — Slide 12, *Técnicas de Auditoria*)
 
-**Auditora Condutora (Pessoa 6):** Maria Eduarda Silveira *(Apoio sugerido: Augusto Henrique — P1 / Pessoa 5)*  
+**Auditoras Condutoras (Pessoa 6):** Ana Júlia Silveira e Maria Eduarda Silveira *(Apoio sugerido: Augusto Henrique — P1 / Rafael Gomes — P5)*  
 **Objetivo:** Esclarecer com os auditados o fluxo real de operação, desenvolvimento, funções, relatórios e controles compensatórios que não constam apenas no código-fonte.
 
 ---
@@ -22,7 +22,7 @@
 ## Passos 4 e 5 — Ata Oficial da Reunião de Auditoria
 
 - **Data:** 24/11/2026 | **Início:** `___:___` | **Encerramento:** `___:___`
-- **Representantes da Auditoria Presentes:** `Maria Eduarda Silveira, ________________________`
+- **Representantes da Auditoria Presentes:** `Ana Júlia Silveira, Maria Eduarda Silveira, ___________________`
 - **Representantes da Empresa Auditada (*Açaí do Vale*) Presentes:** `____________________________`
 
 ### Registro Objetivo das Declarações e Esclarecimentos Obtidos:
@@ -40,5 +40,5 @@
 ## Passos 6 e 7 — Análise da Entrevista e Opinião para o Relatório Final
 - **Convergências/Divergências entre o relato da equipe e os testes técnicos:**
   `_________________________________________________________________________________________`
-- **Conclusão do Entrevistador (Pessoa 6):**
+- **Conclusão das Entrevistadoras (Pessoa 6):**
   `_________________________________________________________________________________________`

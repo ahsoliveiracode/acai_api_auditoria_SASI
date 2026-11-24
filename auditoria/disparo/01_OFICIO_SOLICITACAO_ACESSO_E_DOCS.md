@@ -1,7 +1,7 @@
 # Ofício de Solicitação de Acesso, Entrevista e Documentação — Auditoria SASI
 
 **Para:** Equipe da Empresa *Açaí do Vale* (A/C: Gabriel Castro — Product Lead, Pávila Cardoso — Arquitetura/BD e Ana Clara Azevedo — DevOps)  
-**De:** Equipe de Auditoria de Sistemas — Líder: **Augusto Henrique (P1)** | Coord. Entrevistas/Docs: **Maria Eduarda Silveira (P6)**  
+**De:** Equipe de Auditoria de Sistemas — Líder: **Augusto Henrique (P1)** | Coord. Entrevistas/Docs: **Ana Júlia Silveira e Maria Eduarda Silveira (P6)**  
 **Data:** 24/11/2026 | **Prazo Solicitado de Retorno Inicial:** Hoje, o quanto antes
 
 ---
@@ -20,8 +20,8 @@ Iniciamos a auditoria de controles internos do sistema **Açaí do Vale** (TPIII
 - **Evidência/descrição da rotina de Backup** do banco PostgreSQL (Neon/Docker) e relação de quem detém permissão de administrador no GitHub, Vercel e Neon.
 
 ### 3. Confirmação de Agenda de Hoje (24/11)
-1. **Questionário à Distância** (`02_QUESTIONARIO_CONTROLES_INTERNOS.md`): preenchimento remoto pelos responsáveis técnicos até **12h30**;
-2. **Entrevista no Ambiente Computacional + Visita *In Loco*** (duração total: **25 minutos**, conduzidas por **Maria Eduarda Silveira** e **Ana Júlia Silveira**): confirmação da melhor janela hoje.
+1. **Questionário à Distância** (`02_QUESTIONARIO_CONTROLES_INTERNOS.md`): preenchimento remoto pelos responsáveis técnicos hoje;
+2. **Entrevista no Ambiente Computacional + Visita *In Loco*** (duração total: **25 minutos**, conduzidas por **Ana Júlia Silveira** e **Maria Eduarda Silveira**): confirmação da melhor janela hoje.
 
 Atenciosamente,  
 **Augusto Henrique** (Líder da Auditoria) & Equipe SASI

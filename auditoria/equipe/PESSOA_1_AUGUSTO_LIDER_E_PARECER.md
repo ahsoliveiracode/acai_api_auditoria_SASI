@@ -7,20 +7,20 @@
 
 ## 1. Seu Roteiro de Liderança Hoje (24/11)
 
-1. **Manhã (Já concluído com este kit):** Entregar o `00_PLANO_MESTRE_FASE1.md` (com o DFD e os 12 PCs hierarquizados pelo Grau de Risco 1–5) para a equipe e autorizar **Maria Eduarda — Duda (P6)** a enviar o Ofício + Questionário ao outro grupo.
-2. **Meio do dia / Tarde (Supervisão e Revisão dos Papéis — Passos 3 e 4, Slide 21, Deck 3):**
-   - Conferir se **Ana Júlia (P2)** registrou data, hora e nomes na Visita *In Loco*;
-   - Conferir se **Pessoa 3**, **Helen (P4)** e **Pessoa 5** preencheram a conclusão e as alternativas de solução para seus 3 pontos cada (total = 12 PCs);
+1. **Planejamento e Disparo:** Entregar o `00_PLANO_MESTRE_FASE1.md` (com o DFD e os 12 PCs hierarquizados pelo Grau de Risco 1–5) para a equipe e alinhar com **Ana Júlia Silveira e Maria Eduarda Silveira (P6)** o envio do Ofício + Questionário ao outro grupo.
+2. **Supervisão e Revisão dos Papéis (Passos 3 e 4, Slide 21, Deck 3):**
+   - Conferir se **Ana Júlia Silveira e Maria Eduarda Silveira (P2/P6)** registraram data, hora e nomes na Visita *In Loco* e na Ata da Entrevista;
+   - Conferir se **Alisson de Souza Rocha (P3)**, **Helen Gonçalves (P4)** e **Rafael Gomes (P5)** preencheram a conclusão e as alternativas de solução para seus 3 pontos cada (total = 12 PCs);
    - Coletar o **Tempo Real** gasto por cada colega para calcular o **Indicador de Qualidade da Auditoria** (Slide 30, Deck 1):
      $$\text{Indicador de Produtividade} = \frac{\text{Soma das Horas Reais da Equipe}}{12\text{ Pontos de Controle Validados}}$$
-3. **Noite (17h00 – 20h00):** Ajustar os números finais nas duas minutas prontas abaixo (Seções 2 e 3) e enviar para a **Pessoa 7** fechar o PDF de até 20 páginas (`GRUPO_X.pdf`).
+3. **Noite (17h00 – 20h00):** Ajustar os números finais nas duas minutas prontas abaixo (Seções 2 e 3) e enviar para **José Inácio de Moraes Santos (P7)** fechar o PDF de até 20 páginas (`GRUPO_X.pdf`).
 4. **Apresentação Amanhã (25/11 — 4 minutos totais seus):** Você abre a apresentação (**2 min**: escopo, metodologia e postura construtiva de parceria com a empresa *Açaí do Vale*) e encerra (**2 min**: leitura executiva do Certificado de Controle Interno e abertura para debate com a empresa auditada, conforme Slide 8 e Slide 26, Deck 3).
 
 ---
 
 ## 2. MINUTA PRONTA — Produto 3.3: Relatório de Redução de Custos e Custo/Benefício (Slide 25, Deck 3)
 
-*(Texto já redigido para a Pessoa 7 inserir na seção de Custo-Benefício do PDF; ajuste apenas valores se desejar)*
+*(Texto já redigido para José Inácio de Moraes Santos — P7 — inserir na seção de Custo-Benefício do PDF; ajuste apenas valores se desejar)*
 
 ### Relatório de Redução de Custos e Retorno sobre Investimento (ROI)
 
@@ -41,8 +41,6 @@ Conforme as diretrizes de Auditoria de Sistemas, este relatório explicita as ec
 ---
 
 ## 3. MINUTA PRONTA — Produto 3.2: Certificado de Controle Interno (Parecer do Auditor — Slide 24, Deck 3)
-
-*(Nota ao Líder: nos slides do Prof. Eduardo Pelli, o Certificado indica em termos globais e sintéticos se o ambiente está em **BOA**, **RAZOÁVEL** ou **MÁ** condição frente aos parâmetros de controle interno. Diante de 3 pontos com Grau de Risco 5-Muito Forte e 4 pontos com Grau 4-Forte, a classificação técnica rigorosa atual é **MÁ CONDIÇÃO** — ou, caso os testes ao vivo mostrem bloqueios compensatórios em produção na Vercel, ajuste para **CONDIÇÃO RAZOÁVEL COM RESSALVAS CRÍTICAS**. O texto abaixo já está escrito no tom diplomático e profissional exigido para apresentar à empresa dos colegas!)*
 
 ### CERTIFICADO DE CONTROLE INTERNO (PARECER DA AUDITORIA DE SISTEMAS)
 

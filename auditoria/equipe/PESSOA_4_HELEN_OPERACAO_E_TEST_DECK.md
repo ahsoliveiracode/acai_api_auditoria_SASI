@@ -1,14 +1,14 @@
 # Caderno da Pessoa 4 — Helen Gonçalves (Sistema em Operação e Simulação *Test Deck*)
 
-**Auditora Responsável:** Helen Gonçalves *(Confirmada)*  
+**Auditora Responsável:** Helen Gonçalves  
 **Papel na Auditoria:** Auditora de Sistemas em Operação (Transformação de Dados em Informação) e Executora do *Test Deck*  
 **Pontos sob sua Responsabilidade (3 PCs):**
 - **`PC02` (Grau de Risco: 5 – Muito forte · 2º Mais Grave):** Programas de Cálculo e Crítica de Entrada de Pedidos (`valorTotal` enviado pelo cliente)
 - **`PC03` (Grau de Risco: 5 – Muito forte · 3º Mais Grave):** Rotinas de Atualização de Cupons Promocionais e Saldo de Fidelidade (`/coupons` e `/loyalty`)
 - **`PC06` (Grau de Risco: 4 – Forte · 6º):** Fidelidade da Informação, *Audit Trail* (Logs), Arquivos de Erros e Pipeline CI/CD (`github/`, `husky/`)
 
-**Orçamento de Tempo:** **5h00** (Compreensão da lógica e preparação da massa: 1h00 | Execução do *Test Deck* `test-deck.sh` + navegador: 2h30 | Redação dos 3 PCs e tabela do *Test Deck* para a Pessoa 7: 1h30)  
-**Prazo Interno para Entregar à Pessoa 7:** Hoje, até **17h00**
+**Orçamento de Tempo:** **5h00** (Compreensão da lógica e preparação da massa: 1h00 | Execução do *Test Deck* `test-deck.sh` + navegador: 2h30 | Redação dos 3 PCs e tabela do *Test Deck* para José Inácio — P7: 1h30)  
+**Prazo Interno para Entregar a José Inácio de Moraes Santos (P7):** Hoje, até **17h00**
 
 ---
 
@@ -31,7 +31,7 @@ O Prof. Eduardo Pelli exige no **Slide 7 (*Técnicas de Auditoria*)** que o *Tes
 
 ---
 
-## 2. Modelo Pronto de Entrega para Enviar à Pessoa 7 até 17h00
+## 2. Modelo Pronto de Entrega para Enviar a José Inácio de Moraes Santos (Pessoa 7) até 17h00
 
 ### Ponto de Controle `PC02` — Programas de Cálculo e Consistência Financeira de Pedidos *(Grau de Risco: 5 – Muito forte)*
 - **Técnicas Aplicadas:** Simulação de dados (*Test Deck* — casos `TD-A`, `TD-B`, `TD-C`), Rastreamento de programas (`PedidoContext.tsx` → `api/pedidos/route.ts` e `create-order.use-case.ts`) e Questionário (Q11).

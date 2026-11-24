@@ -1,7 +1,7 @@
 # Questionário à Distância — Avaliação dos Parâmetros de Controle Interno
 
 **Sistema Auditado:** Açaí do Vale (`acai_api/delivery-main`)  
-**Coordenação de Remessa e Recebimento (Pessoa 6):** Maria Eduarda Silveira  
+**Coordenação de Remessa e Recebimento (Pessoa 6):** Ana Júlia Silveira e Maria Eduarda Silveira  
 
 ---
 
@@ -19,7 +19,7 @@
 
 ---
 
-### Bloco 1 — Ambiente Físico, Microcomputadores e Backup (Frente Pessoa 2 · `PC09`, `PC10`, `PC11`)
+### Bloco 1 — Ambiente Físico, Microcomputadores e Backup (Frente P2 — Ana Júlia Silveira e Maria Eduarda Silveira · `PC09`, `PC10`, `PC11`)
 
 | Nº | Pergunta | Sim | Não | Parcial | Observação / Evidência do Auditado |
 | :-: | :--- | :-: | :-: | :-: | :--- |
@@ -31,7 +31,7 @@
 
 ---
 
-### Bloco 2 — Teleprocessamento, Banco de Dados e Redes (Frente Pessoa 3 · `PC01`, `PC05`, `PC12`)
+### Bloco 2 — Teleprocessamento, Banco de Dados e Redes (Frente P3 — Alisson de Souza Rocha · `PC01`, `PC05`, `PC12`)
 
 | Nº | Pergunta | Sim | Não | Parcial | Observação / Evidência do Auditado |
 | :-: | :--- | :-: | :-: | :-: | :--- |
@@ -43,7 +43,7 @@
 
 ---
 
-### Bloco 3 — Sistema em Operação, Cálculos e Logs (Frente Pessoa 4 · `PC02`, `PC03`, `PC06`)
+### Bloco 3 — Sistema em Operação, Cálculos e Logs (Frente P4 — Helen Gonçalves · `PC02`, `PC03`, `PC06`)
 
 | Nº | Pergunta | Sim | Não | Parcial | Observação / Evidência do Auditado |
 | :-: | :--- | :-: | :-: | :-: | :--- |
@@ -54,7 +54,7 @@
 
 ---
 
-### Bloco 4 — Relatórios, Telas e Auditoria de Funções (Frente Pessoa 5 · `PC04`, `PC07`, `PC08`)
+### Bloco 4 — Relatórios, Telas e Auditoria de Funções (Frente P5 — Rafael Gomes · `PC04`, `PC07`, `PC08`)
 
 | Nº | Pergunta | Sim | Não | Parcial | Observação / Evidência do Auditado |
 | :-: | :--- | :-: | :-: | :-: | :--- |

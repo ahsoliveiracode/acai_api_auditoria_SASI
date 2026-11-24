@@ -1,13 +1,13 @@
-# Caderno da Pessoa 2 — Ana Júlia Silveira (Ambiente Físico, Microinformática e Backup)
+# Caderno da Pessoa 2 — Ana Júlia Silveira e Maria Eduarda Silveira (Ambiente Físico, Microinformática e Backup)
 
-**Papel na Auditoria:** Auditora de Segurança Física/Ambiental, Microcomputadores e Rotinas de Backup  
+**Auditoras Responsáveis (em dupla — P2/P6):** Ana Júlia Silveira e Maria Eduarda Silveira  
+**Papel na Auditoria:** Segurança Física/Ambiental, Microcomputadores, Rotinas de Backup e Condução da Visita *In Loco*  
 **Pontos sob sua Responsabilidade (3 PCs):**
 - **`PC09` (Grau de Risco: 3 – Regular · OBRIGATÓRIO):** Segurança Física e Ambiental do Centro de Computação / Local de Operação
 - **`PC10` (Grau de Risco: 3 – Regular):** Ambiente de Microinformática, Terminais de Operação e Plano de Contingência
 - **`PC11` (Grau de Risco: 3 – Regular):** Armazenamento, Rotinas de Backup e Recuperação de Transações no SGBD
 
-**Orçamento de Tempo:** **5h00** (Revisão do Questionário Bloco 1: 30 min | Visita *In Loco*: 1h30 | Análise de Infra/Backup: 1h30 | Redação dos 3 PCs para a Pessoa 7: 1h30)  
-**Prazo Interno para Entregar à Pessoa 7:** Hoje, até **17h00**
+**Orçamento de Tempo:** **5h00 (em dupla)** | **Prazo Interno para Entregar a José Inácio de Moraes Santos (P7):** Hoje, até **17h00**
 
 ---
 
@@ -17,24 +17,22 @@
    - Use o formulário pronto em `auditoria/disparo/03_CHECKLIST_VISITA_IN_LOCO.md`.
    - **Obrigatório anotar (exigência do slide!):** data, hora de início/fim, nomes das pessoas visitadas, procedimentos observados e acontecimentos durante a visita!
 2. **Analisar Respostas do Bloco 1 do Questionário (Questões 01 a 05):**
-   - Receber de **Maria Eduarda — Duda (P6)** as respostas sobre inventário de micros, proteção elétrica, backup no Neon/Docker, teste de *restore* e plano de contingência.
+   - Consolidar as respostas sobre inventário de micros, proteção elétrica, backup no Neon/Docker, teste de *restore* e plano de contingência.
 3. **Inspeção Técnica de Infraestrutura já Levantada no Repositório (Use nos seus achados!):**
    - No arquivo `acai_api/delivery-main/docker-compose.yml`:
      - Porta `5432:5432` do PostgreSQL exposta diretamente para a máquina/rede local com credencial fraca (`POSTGRES_USER: user` / `POSTGRES_PASSWORD: password`);
      - `healthcheck` na linha 17 testa `pg_isready -U gabriel` (usuário diferente de `user`), prejudicando a recuperação limpa do container;
-     - Não há script de backup automatizado (`pg_dump` agendado) na pasta `scripts/` (`scripts/` só possui `setup-dev.sh`, `create-admin.ts` e `create-admin-prod.sh`), dependendo 100% da configuração padrão da conta gratuita do Neon em produção;
+     - Não há script de backup automatizado (`pg_dump` agendado) na pasta `scripts/` (`scripts/` só possui `setup-dev.sh`, `create-admin.ts` e `create-admin-prod.sh`);
      - Não existe documento de **Plano de Contingência** na pasta `docs/`.
 
 ---
 
-## 2. Modelo Pronto de Entrega para Enviar à Pessoa 7 até 17h00
-
-*(Copie, preencha os dados reais observados na Visita In Loco e envie para a Pessoa 7 consolidar no PDF)*
+## 2. Modelo Pronto de Entrega para Enviar a José Inácio de Moraes Santos (Pessoa 7) até 17h00
 
 ### Ponto de Controle `PC09` — Segurança Física e Ambiental do Ambiente Computacional *(Grau de Risco: `[3 - Regular ou ajustar após visita]`)*
 - **Técnicas Aplicadas:** Visita *in loco* (em 24/11/2026 às `___:___`, acompanhada por `_________`) e Questionário à distância (Q02).
 - **Análise Realizada:** Verificou-se a infraestrutura elétrica, ventilação, exposição a calor/poeira/umidade/queda, restrição de acesso físico ao local onde operam os equipamentos e posicionamento visual das telas administrativas (Slide 5 e Slide 24, Deck 1).
-- **Problemas Encontrados:** `[Descrever o que viu na visita: ex.: ausência de no-break dedicado para o equipamento/roteador, livre circulação de terceiros próximo às estações, telas administrativas visíveis lateralmente sem filtro de privacidade e inexistência de controle formal de descarte de anotações físicas]`.
+- **Problemas Encontrados:** `[Descrever o que viram na visita: ex.: ausência de no-break dedicado para o equipamento/roteador, livre circulação de terceiros próximo às estações, telas administrativas visíveis lateralmente sem filtro de privacidade e inexistência de controle formal de descarte de anotações físicas]`.
 - **Sugestões de Melhoria:** Instalar proteção elétrica (no-break/filtro de linha) nos equipamentos de caixa/operação, posicionar o terminal do `/dashboard` em balcão restrito fora do campo visual de clientes e restringir fisicamente o acesso às estações de trabalho.
 
 ### Ponto de Controle `PC10` — Ambiente de Microinformática, Terminais e Plano de Contingência *(Grau de Risco: `[3 - Regular ou ajustar]`)*
