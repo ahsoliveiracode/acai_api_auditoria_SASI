@@ -1,0 +1,198 @@
+REGISTRO BRUTO — TEST DECK LOCAL (PC02, PC03, PC06)
+Alvo: http://localhost:3100
+Inicio: 2026-11-24 21:38:29 -0300
+------------------------------------------------------------------
+[SETUP-1] 2026-11-24 21:38:30 -0300
+REQUISICAO: POST /api/clientes
+CORPO: {"nome":"Cliente Ficticio TD","email":"cliente.td.1795567109@exemplo.test","senha":"***","endereco":"Rua Ficticia, 100"}
+HTTP: 201
+RESPOSTA: {"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD"}
+[SETUP-1] OBSERVACAO: cliente ficticio criado com id=1
+------------------------------------------------------------------
+[TD-A1] 2026-11-24 21:38:31 -0300
+REQUISICAO: POST /api/pedidos
+CORPO: {"clienteId":1,"sabores":[{"id":1}],"adicionais":[{"id":1}],"tamanho":"grande","valorTotal":-50.00,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100"}
+HTTP: 201
+RESPOSTA: {"id":1,"clienteId":1,"tamanho":"grande","valorTotal":-50,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100","status":"Pendente","cupomCodigo":null,"descontoAplicado":0,"createdAt":{},"cliente":{"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD","senha":"***","endereco":"Rua Ficticia, 100","isAdmin":false,"pontosFidelidade":0},"sabores":[{"pedidoId":1,"saborId":1,"sabor":{"id":1,"nome":"Sorvete de Ninho","imagem":"/Gemini_Generated_Image_j8uirpj8uirpj8ui.png"}}],"adicionais":[{"pedidoId":1,"adicionalId":1,"adicional":{"id":1,"nome":"Granulado"}}]}
+------------------------------------------------------------------
+[TD-A1-VERIF] 2026-11-24 21:38:33 -0300
+REQUISICAO: GET /api/pedidos?id=1
+HTTP: 200
+RESPOSTA: [{"id":1,"clienteId":1,"tamanho":"grande","valorTotal":-50,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100","status":"Pendente","cupomCodigo":null,"descontoAplicado":0,"createdAt":{},"cliente":{"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD","senha":"***","endereco":"Rua Ficticia, 100","isAdmin":false,"pontosFidelidade":0},"sabores":[{"pedidoId":1,"saborId":1,"sabor":{"id":1,"nome":"Sorvete de Ninho","imagem":"/Gemini_Generated_Image_j8uirpj8uirpj8ui.png"}}],"adicionais":[{"pedidoId":1,"adicionalId":1,"adicional":{"id":1,"nome":"Granulado"}}]}]
+[TD-A1-VERIF] OBSERVACAO: valorTotal persistido=-50
+------------------------------------------------------------------
+[TD-A2] 2026-11-24 21:38:34 -0300
+REQUISICAO: POST /api/v1/orders
+CORPO: {"customerId":1,"flavorIds":[1],"additionalIds":[],"size":"grande","totalValue":-50.00,"paymentMethod":"pix","deliveryAddress":"Rua Ficticia, 100"}
+HTTP: 201
+RESPOSTA: {"id":2,"customerId":1,"flavorIds":[1],"additionalIds":[],"size":"grande","totalValue":-50,"discountValue":0,"couponCode":null,"paymentMethod":"pix","deliveryAddress":"Rua Ficticia, 100","status":"Pendente","createdAt":"2026-11-25T00:38:34.248Z"}
+------------------------------------------------------------------
+[TD-B1-ANTES] 2026-11-24 21:38:35 -0300
+REQUISICAO: GET /api/v1/loyalty
+HTTP: 200
+RESPOSTA: [{"id":1,"nome":"Cliente Ficticio TD","email":"cliente.td.1795567109@exemplo.test","pontosFidelidade":0,"transacoes":[]}]
+------------------------------------------------------------------
+[TD-B1] 2026-11-24 21:38:36 -0300
+REQUISICAO: POST /api/v1/loyalty
+CORPO: {"clienteId":1,"pontos":9999,"tipo":"redeem","descricao":"Resgate limite TD"}
+HTTP: 200
+RESPOSTA: {"cliente":{"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD","senha":"***","endereco":"Rua Ficticia, 100","isAdmin":false,"pontosFidelidade":-9999},"transacao":{"id":1,"clienteId":1,"tipo":"redeem","pontos":-9999,"descricao":"Resgate limite TD","createdAt":{}}}
+------------------------------------------------------------------
+[TD-B1-DEPOIS] 2026-11-24 21:38:37 -0300
+REQUISICAO: GET /api/v1/loyalty
+HTTP: 200
+RESPOSTA: [{"id":1,"nome":"Cliente Ficticio TD","email":"cliente.td.1795567109@exemplo.test","pontosFidelidade":-9999,"transacoes":[{"id":1,"clienteId":1,"tipo":"redeem","pontos":-9999,"descricao":"Resgate limite TD","createdAt":{}}]}]
+[TD-B1] OBSERVACAO: saldo antes=0 depois=-9999
+------------------------------------------------------------------
+[TD-B2] 2026-11-24 21:38:38 -0300
+REQUISICAO: POST /api/pedidos
+CORPO: {"clienteId":1,"sabores":[{"id":2}],"adicionais":[],"tamanho":"grande","valorTotal":0,"descontoAplicado":99999,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100"}
+HTTP: 201
+RESPOSTA: {"id":3,"clienteId":1,"tamanho":"grande","valorTotal":0,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100","status":"Pendente","cupomCodigo":null,"descontoAplicado":99999,"createdAt":{},"cliente":{"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD","senha":"***","endereco":"Rua Ficticia, 100","isAdmin":false,"pontosFidelidade":-9999},"sabores":[{"pedidoId":3,"saborId":2,"sabor":{"id":2,"nome":"Açai","imagem":"/Gemini_Generated_Image_jzlh94jzlh94jzlh.png"}}],"adicionais":[]}
+------------------------------------------------------------------
+[TD-C1] 2026-11-24 21:38:39 -0300
+REQUISICAO: POST /api/pedidos
+CORPO: {"clienteId":1,"sabores":[],"adicionais":[],"tamanho":"medio","valorTotal":15.00,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100"}
+HTTP: 201
+RESPOSTA: {"id":4,"clienteId":1,"tamanho":"medio","valorTotal":15,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100","status":"Pendente","cupomCodigo":null,"descontoAplicado":0,"createdAt":{},"cliente":{"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD","senha":"***","endereco":"Rua Ficticia, 100","isAdmin":false,"pontosFidelidade":-9999},"sabores":[],"adicionais":[]}
+------------------------------------------------------------------
+[TD-C2] 2026-11-24 21:38:40 -0300
+REQUISICAO: POST /api/v1/orders
+CORPO: {"customerId":1,"flavorIds":[],"additionalIds":[],"size":"medio","totalValue":15.00,"paymentMethod":"pix","deliveryAddress":"Rua Ficticia, 100"}
+HTTP: 400
+RESPOSTA: {"error":"At least one flavor is required"}
+------------------------------------------------------------------
+[TD-C3] 2026-11-24 21:38:41 -0300
+REQUISICAO: POST /api/pedidos
+CORPO: {"clienteId":1,"sabores":[{"id":1}],"adicionais":[],"tamanho":"medio","valorTotal":15.00,"formaPagamento":"","enderecoEntrega":""}
+HTTP: 201
+RESPOSTA: {"id":5,"clienteId":1,"tamanho":"medio","valorTotal":15,"formaPagamento":"","enderecoEntrega":"","status":"Pendente","cupomCodigo":null,"descontoAplicado":0,"createdAt":{},"cliente":{"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD","senha":"***","endereco":"Rua Ficticia, 100","isAdmin":false,"pontosFidelidade":-9998},"sabores":[{"pedidoId":5,"saborId":1,"sabor":{"id":1,"nome":"Sorvete de Ninho","imagem":"/Gemini_Generated_Image_j8uirpj8uirpj8ui.png"}}],"adicionais":[]}
+------------------------------------------------------------------
+[TD-D1] 2026-11-24 21:38:42 -0300
+REQUISICAO: POST /api/v1/coupons
+CORPO: {"codigo":"TDD567109","tipo":"percentual","valor":100,"usoMaximo":1,"ativo":true}
+HTTP: 201
+RESPOSTA: {"id":1,"codigo":"TDD567109","descricao":null,"tipo":"percentual","valor":100,"valorMinimo":0,"usoMaximo":1,"usosAtuais":0,"ativo":true,"expiraEm":null,"createdAt":{},"updatedAt":{}}
+------------------------------------------------------------------
+[TD-D2-ANTES] 2026-11-24 21:38:42 -0300
+REQUISICAO: GET /api/v1/loyalty
+HTTP: 200
+RESPOSTA: [{"id":1,"nome":"Cliente Ficticio TD","email":"cliente.td.1795567109@exemplo.test","pontosFidelidade":-9997,"transacoes":[{"id":3,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}},{"id":2,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}},{"id":1,"clienteId":1,"tipo":"redeem","pontos":-9999,"descricao":"Resgate limite TD","createdAt":{}}]}]
+------------------------------------------------------------------
+[TD-D2] 2026-11-24 21:38:43 -0300
+REQUISICAO: POST /api/v1/loyalty
+CORPO: {"clienteId":1,"pontos":50000,"tipo":"earn","descricao":"Credito sem autenticacao TD"}
+HTTP: 200
+RESPOSTA: {"cliente":{"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD","senha":"***","endereco":"Rua Ficticia, 100","isAdmin":false,"pontosFidelidade":40003},"transacao":{"id":4,"clienteId":1,"tipo":"earn","pontos":50000,"descricao":"Credito sem autenticacao TD","createdAt":{}}}
+------------------------------------------------------------------
+[TD-D2-DEPOIS] 2026-11-24 21:38:44 -0300
+REQUISICAO: GET /api/v1/loyalty
+HTTP: 200
+RESPOSTA: [{"id":1,"nome":"Cliente Ficticio TD","email":"cliente.td.1795567109@exemplo.test","pontosFidelidade":40003,"transacoes":[{"id":4,"clienteId":1,"tipo":"earn","pontos":50000,"descricao":"Credito sem autenticacao TD","createdAt":{}},{"id":3,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}},{"id":2,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}},{"id":1,"clienteId":1,"tipo":"redeem","pontos":-9999,"descricao":"Resgate limite TD","createdAt":{}}]}]
+------------------------------------------------------------------
+[TD-D3] 2026-11-24 21:38:45 -0300
+REQUISICAO: PATCH /api/v1/coupons
+CORPO: {"codigo":"TDD567109","ativo":false}
+HTTP: 200
+RESPOSTA: {"id":1,"codigo":"TDD567109","descricao":null,"tipo":"percentual","valor":100,"valorMinimo":0,"usoMaximo":1,"usosAtuais":0,"ativo":false,"expiraEm":null,"createdAt":{},"updatedAt":{}}
+------------------------------------------------------------------
+[TD-E0] 2026-11-24 21:38:46 -0300
+REQUISICAO: POST /api/v1/coupons
+CORPO: {"codigo":"TDE567109","tipo":"percentual","valor":10,"usoMaximo":1,"ativo":true}
+HTTP: 201
+RESPOSTA: {"id":2,"codigo":"TDE567109","descricao":null,"tipo":"percentual","valor":10,"valorMinimo":0,"usoMaximo":1,"usosAtuais":0,"ativo":true,"expiraEm":null,"createdAt":{},"updatedAt":{}}
+[TD-E0] OBSERVACAO: cupom de teste TDE567109 (10%, usoMaximo=1) criado com HTTP 201
+------------------------------------------------------------------
+[TD-E1] 2026-11-24 21:38:47 -0300
+REQUISICAO: GET /api/v1/coupons/validate?codigo=TDE567109&valorTotal=20
+HTTP: 200
+RESPOSTA: {"cupom":{"id":2,"codigo":"TDE567109","descricao":null,"tipo":"percentual","valor":10,"valorMinimo":0,"usoMaximo":1,"usosAtuais":0,"ativo":true,"expiraEm":null,"createdAt":{},"updatedAt":{}},"desconto":2,"totalComDesconto":18}
+------------------------------------------------------------------
+[TD-E2] 2026-11-24 21:38:48 -0300
+REQUISICAO: POST /api/pedidos
+CORPO: {"clienteId":1,"sabores":[{"id":3}],"adicionais":[],"tamanho":"grande","valorTotal":18.00,"descontoAplicado":2.00,"cupomCodigo":"TDE567109","formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100"}
+HTTP: 201
+RESPOSTA: {"id":6,"clienteId":1,"tamanho":"grande","valorTotal":18,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100","status":"Pendente","cupomCodigo":"TDE567109","descontoAplicado":2,"createdAt":{},"cliente":{"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD","senha":"***","endereco":"Rua Ficticia, 100","isAdmin":false,"pontosFidelidade":40003},"sabores":[{"pedidoId":6,"saborId":3,"sabor":{"id":3,"nome":"Yogo Morango","imagem":"/Gemini_Generated_Image_hj6gqzhj6gqzhj6g.png"}}],"adicionais":[]}
+------------------------------------------------------------------
+[TD-E2-VERIF] 2026-11-24 21:38:49 -0300
+REQUISICAO: GET /api/v1/coupons
+HTTP: 200
+RESPOSTA: [{"id":2,"codigo":"TDE567109","descricao":null,"tipo":"percentual","valor":10,"valorMinimo":0,"usoMaximo":1,"usosAtuais":1,"ativo":true,"expiraEm":null,"createdAt":{},"updatedAt":{}},{"id":1,"codigo":"TDD567109","descricao":null,"tipo":"percentual","valor":100,"valorMinimo":0,"usoMaximo":1,"usosAtuais":0,"ativo":false,"expiraEm":null,"createdAt":{},"updatedAt":{}}]
+------------------------------------------------------------------
+[TD-E3] 2026-11-24 21:38:49 -0300
+REQUISICAO: GET /api/v1/coupons/validate?codigo=TDE567109&valorTotal=20
+HTTP: 400
+RESPOSTA: {"error":"Limite de uso atingido"}
+------------------------------------------------------------------
+[TD-E4] 2026-11-24 21:38:50 -0300
+REQUISICAO: POST /api/pedidos
+CORPO: {"clienteId":1,"sabores":[{"id":3}],"adicionais":[],"tamanho":"grande","valorTotal":18.00,"descontoAplicado":2.00,"cupomCodigo":"TDE567109","formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100"}
+HTTP: 201
+RESPOSTA: {"id":7,"clienteId":1,"tamanho":"grande","valorTotal":18,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100","status":"Pendente","cupomCodigo":"TDE567109","descontoAplicado":2,"createdAt":{},"cliente":{"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD","senha":"***","endereco":"Rua Ficticia, 100","isAdmin":false,"pontosFidelidade":40004},"sabores":[{"pedidoId":7,"saborId":3,"sabor":{"id":3,"nome":"Yogo Morango","imagem":"/Gemini_Generated_Image_hj6gqzhj6gqzhj6g.png"}}],"adicionais":[]}
+------------------------------------------------------------------
+[TD-E4-VERIF] 2026-11-24 21:38:51 -0300
+REQUISICAO: GET /api/v1/coupons
+HTTP: 200
+RESPOSTA: [{"id":2,"codigo":"TDE567109","descricao":null,"tipo":"percentual","valor":10,"valorMinimo":0,"usoMaximo":1,"usosAtuais":2,"ativo":true,"expiraEm":null,"createdAt":{},"updatedAt":{}},{"id":1,"codigo":"TDD567109","descricao":null,"tipo":"percentual","valor":100,"valorMinimo":0,"usoMaximo":1,"usosAtuais":0,"ativo":false,"expiraEm":null,"createdAt":{},"updatedAt":{}}]
+[TD-E] OBSERVACAO: validacao1=200 pedido1=201 usos=1 validacao2=400 (Limite de uso atingido) pedido2=201 usos=2
+------------------------------------------------------------------
+[TC-01] 2026-11-24 21:38:52 -0300
+REQUISICAO: POST /api/pedidos
+CORPO: {"clienteId":1,"sabores":[{"id":1}],"adicionais":[],"tamanho":"pequeno","valorTotal":0,"descontoAplicado":0,"cupomCodigo":"TDD567109","formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100"}
+HTTP: 201
+RESPOSTA: {"id":8,"clienteId":1,"tamanho":"pequeno","valorTotal":0,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100","status":"Pendente","cupomCodigo":"TDD567109","descontoAplicado":0,"createdAt":{},"cliente":{"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD","senha":"***","endereco":"Rua Ficticia, 100","isAdmin":false,"pontosFidelidade":40005},"sabores":[{"pedidoId":8,"saborId":1,"sabor":{"id":1,"nome":"Sorvete de Ninho","imagem":"/Gemini_Generated_Image_j8uirpj8uirpj8ui.png"}}],"adicionais":[]}
+------------------------------------------------------------------
+[TC-01-VERIF] 2026-11-24 21:38:52 -0300
+REQUISICAO: GET /api/v1/coupons
+HTTP: 200
+RESPOSTA: [{"id":2,"codigo":"TDE567109","descricao":null,"tipo":"percentual","valor":10,"valorMinimo":0,"usoMaximo":1,"usosAtuais":2,"ativo":true,"expiraEm":null,"createdAt":{},"updatedAt":{}},{"id":1,"codigo":"TDD567109","descricao":null,"tipo":"percentual","valor":100,"valorMinimo":0,"usoMaximo":1,"usosAtuais":1,"ativo":false,"expiraEm":null,"createdAt":{},"updatedAt":{}}]
+------------------------------------------------------------------
+[TC-02] 2026-11-24 21:38:53 -0300
+REQUISICAO: POST /api/pedidos
+CORPO: {"clienteId":1,"sabores":[{"id":1}],"adicionais":[],"tamanho":"pequeno","valorTotal":5.00,"descontoAplicado":5.00,"cupomCodigo":"INEXISTENTE7109","formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100"}
+HTTP: 201
+RESPOSTA: {"id":9,"clienteId":1,"tamanho":"pequeno","valorTotal":5,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100","status":"Pendente","cupomCodigo":"INEXISTENTE7109","descontoAplicado":5,"createdAt":{},"cliente":{"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD","senha":"***","endereco":"Rua Ficticia, 100","isAdmin":false,"pontosFidelidade":40005},"sabores":[{"pedidoId":9,"saborId":1,"sabor":{"id":1,"nome":"Sorvete de Ninho","imagem":"/Gemini_Generated_Image_j8uirpj8uirpj8ui.png"}}],"adicionais":[]}
+------------------------------------------------------------------
+[TC-03-ANTES] 2026-11-24 21:38:54 -0300
+REQUISICAO: GET /api/v1/loyalty
+HTTP: 200
+RESPOSTA: [{"id":1,"nome":"Cliente Ficticio TD","email":"cliente.td.1795567109@exemplo.test","pontosFidelidade":40005,"transacoes":[{"id":6,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}},{"id":5,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}},{"id":4,"clienteId":1,"tipo":"earn","pontos":50000,"descricao":"Credito sem autenticacao TD","createdAt":{}},{"id":3,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}},{"id":2,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}}]}]
+------------------------------------------------------------------
+[TC-03] 2026-11-24 21:38:55 -0300
+REQUISICAO: POST /api/pedidos
+CORPO: {"clienteId":1,"sabores":[{"id":2}],"adicionais":[],"tamanho":"pequeno","valorTotal":1000.00,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100"}
+HTTP: 201
+RESPOSTA: {"id":10,"clienteId":1,"tamanho":"pequeno","valorTotal":1000,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100","status":"Pendente","cupomCodigo":null,"descontoAplicado":0,"createdAt":{},"cliente":{"id":1,"email":"cliente.td.1795567109@exemplo.test","nome":"Cliente Ficticio TD","senha":"***","endereco":"Rua Ficticia, 100","isAdmin":false,"pontosFidelidade":40005},"sabores":[{"pedidoId":10,"saborId":2,"sabor":{"id":2,"nome":"Açai","imagem":"/Gemini_Generated_Image_jzlh94jzlh94jzlh.png"}}],"adicionais":[]}
+------------------------------------------------------------------
+[TC-03-DEPOIS] 2026-11-24 21:38:56 -0300
+REQUISICAO: GET /api/v1/loyalty
+HTTP: 200
+RESPOSTA: [{"id":1,"nome":"Cliente Ficticio TD","email":"cliente.td.1795567109@exemplo.test","pontosFidelidade":40105,"transacoes":[{"id":7,"clienteId":1,"tipo":"earn","pontos":100,"descricao":"Compra realizada","createdAt":{}},{"id":6,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}},{"id":5,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}},{"id":4,"clienteId":1,"tipo":"earn","pontos":50000,"descricao":"Credito sem autenticacao TD","createdAt":{}},{"id":3,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}}]}]
+------------------------------------------------------------------
+[TC-04] 2026-11-24 21:38:59 -0300
+REQUISICAO: PATCH /api/v1/admin/orders/10/status
+CORPO: {"status":"Cancelado"}
+HTTP: 200
+RESPOSTA: {"id":10,"customerId":1,"flavorIds":[2],"additionalIds":[],"size":"pequeno","totalValue":1000,"discountValue":0,"couponCode":null,"paymentMethod":"pix","deliveryAddress":"Rua Ficticia, 100","status":"Cancelado","createdAt":"2026-11-25T00:38:54.891Z"}
+------------------------------------------------------------------
+[TC-05] 2026-11-24 21:39:00 -0300
+REQUISICAO: DELETE /api/pedidos?id=10
+HTTP: 200
+RESPOSTA: {"message":"Pedido removido com sucesso"}
+------------------------------------------------------------------
+[TC-05-VERIF] 2026-11-24 21:39:01 -0300
+REQUISICAO: GET /api/pedidos?id=10
+HTTP: 200
+RESPOSTA: []
+------------------------------------------------------------------
+[TC-05-PONTOS] 2026-11-24 21:39:02 -0300
+REQUISICAO: GET /api/v1/loyalty
+HTTP: 200
+RESPOSTA: [{"id":1,"nome":"Cliente Ficticio TD","email":"cliente.td.1795567109@exemplo.test","pontosFidelidade":40105,"transacoes":[{"id":7,"clienteId":1,"tipo":"earn","pontos":100,"descricao":"Compra realizada","createdAt":{}},{"id":6,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}},{"id":5,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}},{"id":4,"clienteId":1,"tipo":"earn","pontos":50000,"descricao":"Credito sem autenticacao TD","createdAt":{}},{"id":3,"clienteId":1,"tipo":"earn","pontos":1,"descricao":"Compra realizada","createdAt":{}}]}]
+------------------------------------------------------------------
+[TC-06] 2026-11-24 21:39:03 -0300
+REQUISICAO: POST /api/pedidos
+CORPO: {"clienteId":987654321,"sabores":[{"id":1}],"adicionais":[],"tamanho":"pequeno","valorTotal":10,"formaPagamento":"pix","enderecoEntrega":"Rua Ficticia, 100"}
+HTTP: 500
+RESPOSTA: {"error":"Erro ao adicionar pedido"}
+Fim: 2026-11-24 21:39:03 -0300

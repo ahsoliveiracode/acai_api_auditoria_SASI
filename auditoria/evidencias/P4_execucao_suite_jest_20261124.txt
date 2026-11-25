@@ -1,0 +1,50 @@
+EXECUCAO DA SUITE JEST DO PROJETO (tests/integration/api.test.ts) — AMBIENTE LOCAL ISOLADO
+Data/hora: 2026-11-24 21:41:10 -0300
+Alvo fixado no teste: http://localhost:3000 (copia local da aplicacao; banco PostgreSQL em memoria, descartavel)
+Comando: npx jest --ci --verbose --colors=false
+Observacao: o beforeAll/afterAll do teste executa deleteMany em todas as tabelas; por isso a suite foi executada somente no banco descartavel.
+
+    √ should create and fetch a customer via root /api/clientes (56 ms)
+    × should update the customer via root /api/clientes (53 ms)
+    √ should create and fetch sabor via root /api/sabores (53 ms)
+    √ should create and fetch adicional via root /api/adicionais (94 ms)
+    × should create an order via root /api/pedidos and then update and delete it (198 ms)
+    × should authenticate customer via v1 /api/v1/auth/login (218 ms)
+    √ should create, list, validate and patch a coupon via /api/v1/coupons (270 ms)
+    √ should list flavors via /api/v1/flavors and get flavor by id (136 ms)
+    √ should list additionals via /api/v1/additionals and get adicional by id (169 ms)
+    √ should manage v1 customer lifecycle via /api/v1/customers (926 ms)
+    × should manage v1 order lifecycle via /api/v1/orders (107 ms)
+    × should manage favorites via /api/v1/favorites (84 ms)
+    × should manage loyalty points via /api/v1/loyalty (195 ms)
+    × should return admin stats and update order status (215 ms)
+  ● API Integration Tests › should update the customer via root /api/clientes
+    Expected: 200
+    Received: 400
+  ● API Integration Tests › should create an order via root /api/pedidos and then update and delete it
+    Expected: 201
+    Received: 500
+  ● API Integration Tests › should authenticate customer via v1 /api/v1/auth/login
+    Expected: 200
+    Received: 500
+  ● API Integration Tests › should manage v1 order lifecycle via /api/v1/orders
+    Expected: 201
+    Received: 400
+  ● API Integration Tests › should manage favorites via /api/v1/favorites
+    Expected: 201
+    Received: 400
+  ● API Integration Tests › should manage loyalty points via /api/v1/loyalty
+    Expected: 200
+    Received: 400
+  ● API Integration Tests › should return admin stats and update order status
+    Expected: 201
+    Received: 500
+Test Suites: 1 failed, 1 total
+Tests:       7 failed, 7 passed, 14 total
+
+Verificacao complementar: POST /api/clientes sem o campo endereco (como no beforeAll do teste)
+{"error":"Nome, email, endereço e senha são obrigatórios"} [HTTP 400]
+
+Execucao de npm run lint (invocado pelo hook husky/pre-commit):
+npm error Missing script: "lint"
+npm error
