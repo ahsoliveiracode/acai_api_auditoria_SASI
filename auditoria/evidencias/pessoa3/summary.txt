@@ -1,0 +1,10 @@
+Auditoria de integração — PC01, PC05 e PC12
+Branch: TPIII
+Data: 24/11/2026
+Ambiente: Next.js local em loopback e PostgreSQL 17 temporário em loopback
+Dados: exclusivamente fictícios
+Seeds: não executados
+Migrations aplicadas: 8
+Tabelas criadas no banco temporário: 12
+Limitações: sem produção, dados reais, requisições externas ou ataques de força bruta
+Os recursos temporários utilizados foram removidos após os testes.

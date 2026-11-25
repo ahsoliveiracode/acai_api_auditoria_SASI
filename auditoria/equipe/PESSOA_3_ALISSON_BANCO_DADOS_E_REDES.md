@@ -2,9 +2,10 @@
 
 **Auditor Responsável:** Alisson de Souza Rocha  
 **Papel na Auditoria:** Auditoria de Teleprocessamento, Banco de Dados, Redes e Segurança Lógica de Cadastros  
+**Branch da Auditoria:** `TPIII`
 **Pontos sob sua Responsabilidade (3 PCs):**
 - **`PC01` (Grau de Risco: 5 – Muito forte · 1º Mais Grave):** Controle de Acesso ao Teleprocessamento/APIs e Rotas Admin (`/api/*`, `/api/seed`, `/api/create-admin`)
-- **`PC05` (Grau de Risco: 4 – Forte · 5º):** Gestão de Passwords, Sessões JWT/OAuth e Segurança em Redes
+- **`PC05` (Grau de Risco: 5 – Muito forte · Problemas Críticos):** Gestão de Passwords, Sessões JWT/OAuth e Segurança em Redes
 - **`PC12` (Grau de Risco: 2 – Fraco · 12º):** Administração de Banco de Dados, Unicidade do Dado, Dicionário e Eficiência de Arquivos
 
 **Orçamento de Tempo:** **5h00** (Inspeção Técnica de BD/Rotas: 1h30 | Testes de Acesso e Senhas: 2h00 | Redação dos 3 PCs para José Inácio — P7: 1h30)  
@@ -12,46 +13,174 @@
 
 ---
 
-## 1. Base Técnica Já Levantada no Código para Seus Testes (Slides 5, 20–23 e 25, Deck 1)
+## 1. Base Técnica e Resultados dos Testes de Integração (24/11/2026)
 
-### Para `PC01` (Controle de Acesso ao Teleprocessamento e APIs):
-- **Evidência no Código:**
-  1. `src/middleware.js` (linhas 25–28) define `matcher: ["/protegido/:path*", "/admin/:path*"]`. **Nenhuma rota de `/api/*` ou `/api/v1/*` passa pelo middleware**, nem possuem checagem de sessão nos Controllers! Isso permite *leitura/extração, alteração e exclusão de dados por entidade não autorizada* (Slide 21, Deck 1).
-  2. `src/app/api/seed/route.ts` (linhas 11–17 e 86): compara `if (secret !== process.env.ADMIN_SECRET)`. Se `ADMIN_SECRET` não estiver setado no servidor (`undefined`), enviar `{}` faz `undefined !== undefined` dar **falso**, executando o seed, criando o admin `admin@delivery.com` e **devolvendo `"senha": "admin123"` em texto claro na resposta HTTP**!
-  3. `src/app/api/create-admin/route.ts` (linha 7): mantém endpoint web ativo apesar do comentário `"REMOVER APÓS CRIAR O PRIMEIRO ADMIN"`.
-- **Teste Prático:** Testar `curl -i <URL>/api/v1/customers` sem token e checar retorno `200 OK`.
+### Metodologia aplicada
 
-### Para `PC05` (Passwords, Sessões JWT/OAuth e Protocolos de Rede):
-- **Evidência no Código:**
-  1. Chaves secretas de fallback chumbadas no código: `src/lib/jwt.ts` (`'dev_insecure_secret_change_me'`) e `src/infrastructure/cryptography/jwt-token-provider.ts` (`'default-secret-key'`).
-  2. Três mecanismos de autenticação paralelos (`/api/auth/[...nextauth]`, `/api/v1/auth/login` e `/api/jwt/login`), tokens com validade longa (`7d`) sem lista de revogação, ausência de complexidade mínima de senha no cadastro e ausência de bloqueio contra força bruta (*rate limit*).
-  3. Em `src/lib/auth.ts` (linhas 59–66), o login via Google vincula automaticamente contas existentes pelo e-mail sem checar `profile.email_verified`.
+Os resultados desta seção combinam análise estática do programa fonte e testes de integração em ambiente local isolado:
 
-### Para `PC12` (Administração de BD, Unicidade, Dicionário e Eficiência de Arquivos — Slide 5 e Slide 20, Deck 1):
-- **Pontos Positivos Encontrados (Justificam Grau de Risco 2 – Fraco):** Presença de SGBD relacional robusto (**PostgreSQL**), queries parametrizadas via **Prisma ORM** (evitando SQL Injection), senhas gravadas com **hash `bcrypt` (custo 10)** e container Docker de produção rodando com usuário sem privilégio root (`USER nextjs`).
-- **Ressalvas Encontradas:**
-  1. **Quebra de Unicidade do Dado e Eficiência de Arquivos:** Coexistência de arquivos JSON legados na pasta `/data` (`clientes.json`, `pedidos.json`, `sabores.json`, `adicionais.json`) junto ao PostgreSQL, além de migrations duplicadas (`20260413000000_add_endereco_to_cliente` e `20260425111500_add_endereco_to_cliente`).
-  2. **Precisão de Tipos:** Uso de `Float` em vez de `Decimal(10,2)` em `Pedido.valorTotal`, `Pedido.descontoAplicado`, `Cupom.valor` e `Favorito.preco`.
-  3. **Ausência da Função de Administrador de Dados (DBA) e Dicionário Formal:** Confirmar com Q06 e Q10 do Questionário recebido por Ana Júlia Silveira e Maria Eduarda Silveira (P6).
+- Aplicação Next.js 15.5.7 executada apenas em `127.0.0.1` em portas temporárias.
+- PostgreSQL 17 temporário, publicado somente em `127.0.0.1` e executado sem volume persistente.
+- Rede Docker exclusiva da auditoria e dados exclusivamente fictícios.
+- Requisições HTTP reais contra os handlers da aplicação local.
+- Verificações diretas no PostgreSQL temporário.
+- Aplicação das migrations sem execução de seeds automáticos.
+- Não houve acesso à produção, dados reais, requisições externas ou ataques de força bruta.
+- Evidências sanitizadas da Pessoa 3 publicadas em `auditoria/evidencias/pessoa3/`:
+  - `integration-results.json`: resultados integrados por teste, sem credenciais, senhas ou tokens completos;
+  - `summary.txt`: resumo do ambiente e das limitações;
+  - `environment.txt`: identificação sanitizada do ambiente temporário.
+- Os arquivos locais originais permaneceram em `/tmp/acai-auditoria-integracao/evidencias/` como evidências de trabalho; nesta entrega são versionadas apenas as cópias sanitizadas da pasta indicada.
+
+### Para `PC01` — Controle de acesso às APIs *(Grau de Risco: 5 — Muito forte)*
+
+#### Vulnerabilidades reproduzidas
+
+1. **Consulta anônima de clientes e pedidos:**
+   - `GET /api/v1/customers` sem autenticação respondeu `200` e devolveu uma lista de clientes.
+   - `GET /api/v1/orders` sem autenticação respondeu `200` e devolveu uma lista de pedidos.
+   - Evidência: `src/app/api/v1/customers/route.ts:11-20` e `src/app/api/v1/orders/route.ts:10-18`.
+
+2. **Atualização de cliente sem sessão:**
+   - `PUT /api/clientes` alterou o nome de um cliente fictício usando o e-mail do próprio recurso, sem autenticação.
+   - Resultado observado: `200` com o nome alterado.
+   - Evidência: `src/app/api/clientes/route.ts:91-132`.
+
+3. **Criação de pedido sem vinculação segura à sessão:**
+   - `POST /api/pedidos` criou pedido fictício anônimo com `clienteId` informado pelo chamador.
+   - Resultado observado: `201` com identificador do pedido.
+   - Evidência: `src/app/api/pedidos/route.ts:33-104`.
+
+4. **Acesso administrativo anônimo:**
+   - `GET /api/v1/admin/dashboard/stats` respondeu `200` sem sessão ou privilégio administrativo.
+   - Evidência: `src/app/api/v1/admin/dashboard/stats/route.ts:21-23`.
+
+5. **Alteração administrativa sem autenticação:**
+   - `PATCH /api/v1/admin/orders/[id]/status` alterou o status de um pedido fictício sem sessão e sem validação de `isAdmin`.
+   - Resultado observado: `200`.
+   - Evidência: `src/app/api/v1/admin/orders/[id]/status/route.ts:31-49`.
+
+#### Controles positivos e correções da análise anterior
+
+- `/api/seed` com corpo vazio respondeu `401`.
+- `/api/create-admin` com segredo inválido respondeu `401`.
+- Evidência: `src/app/api/seed/route.ts:10-15` e `src/app/api/create-admin/route.ts:7-14`.
+- Essas rotas continuam presentes na aplicação web e devem ser removidas ou substituídas por operações administrativas CLI fora do servidor web.
+- Foi corrigida a afirmação anterior de bypass de `ADMIN_SECRET`: o código exige `!process.env.ADMIN_SECRET || secret !== process.env.ADMIN_SECRET`. Quando o segredo está ausente, o acesso é negado. Não foi reproduzida a criação do administrador fixo nem a exposição de senha fixa na resposta.
+
+#### Evidência técnica complementar
+
+- `src/middleware.js:25-28` limita o `matcher` a `/protegido/:path*` e `/admin/:path*`; rotas `/api/*` e `/api/v1/*` não passam pela proteção indicada.
+- Os controllers não verificaram sessão ou perfil nos handlers reproduzidos.
+
+#### Recomendação prioritária
+
+- Exigir sessão autenticada e RBAC no servidor para todas as APIs sensíveis.
+- Derivar o cliente autenticado da sessão em consultas e pedidos.
+- Validar propriedade do objeto antes de consultas, alterações e exclusões.
+- Exigir `isAdmin` em estatísticas e alterações administrativas.
+- Remover `/api/seed` e `/api/create-admin` da aplicação implantada.
+
+### Para `PC05` — Senhas, JWT e redes *(Grau de Risco: 5 — Muito forte para falhas críticas de autenticação)*
+
+#### Vulnerabilidades reproduzidas
+
+1. **Emissão JWT sem autenticação:**
+   - `POST /api/jwt/login` emitiu JWT com dados fictícios sem validar senha ou sessão.
+   - Resultado observado: `200` e token emitido pela biblioteca real.
+   - Evidência: `src/app/api/jwt/login/route.ts:7-17` e `src/lib/jwt.ts:10-17`.
+
+2. **Fallback JWT previsível sem `JWT_SECRET`:**
+   - Em uma instância local iniciada sem `JWT_SECRET`, `/api/jwt/login` respondeu `200` e emitiu token assinado pelo fallback.
+   - A assinatura emitida foi verificada localmente com o fallback previsível definido no código-fonte, sem publicar seu valor.
+   - Evidência: `src/lib/jwt.ts:3-6`.
+   - Não foi publicado token completo em nenhuma evidência.
+
+#### Controles positivos
+
+- Login fictício correto em `/api/v1/auth/login` respondeu `200`.
+- Login fictício incorreto respondeu `401` com uma única tentativa; não houve ataque de força bruta.
+- Os cadastros fictícios armazenaram hashes bcrypt válidos no banco temporário.
+- A comparação bcrypt de uma credencial correta foi positiva.
+- Evidências: `src/core/application/use-cases/auth/authenticate-customer.use-case.ts:24-45`, `src/app/api/clientes/route.ts:80` e `src/infrastructure/cryptography/bcrypt-hash-provider.ts:9-16`.
+
+#### Suspeitas e limitações
+
+- Não foi executado teste real de OAuth com Google.
+- Não foi concluída uma validação dinâmica de rate limit ou bloqueio; a ausência não foi testada por ataque de força bruta.
+- O vínculo OAuth por e-mail continua sendo uma suspeita que exige validação, não uma vulnerabilidade concluída por este teste.
+- Evidência de análise: `src/lib/auth.ts:57-85`.
+
+#### Recomendação prioritária
+
+- Remover `/api/jwt/login` ou exigir autenticação completa antes da emissão.
+- Remover todos os fallbacks de segredo e falhar a inicialização quando `JWT_SECRET` estiver ausente.
+- Reduzir o tempo de vida dos tokens e implementar revogação.
+- Implementar rate limiting por conta, IP e dispositivo.
+- Adotar política mínima de complexidade e tamanho de senha.
+
+### Para `PC12` — Banco de dados *(Grau de Risco: 2 — Fraco)*
+
+#### Resultados confirmados
+
+- O schema foi aplicado em PostgreSQL temporário e resultou em **8 migrations aplicadas**.
+- Foram criadas **12 tabelas** no banco descartável.
+- A unicidade de e-mail foi confirmada: segundo cliente fictício com o mesmo e-mail foi rejeitado com `P2002`.
+- A unicidade de código de cupom foi confirmada: cupom duplicado foi rejeitado com `P2002`.
+- A integridade referencial foi confirmada: pedido com cliente inexistente foi rejeitado com `P2003`.
+- PostgreSQL temporário ficou restrito à interface `127.0.0.1:55565`; Docker informou binding loopback e nenhum volume persistente.
+- Evidências: `prisma/schema.prisma:29-30`, `prisma/schema.prisma:45-47`, `prisma/schema.prisma:80-81`.
+
+#### Controle positivo
+
+- Modelo relacional robusto, uso de Prisma, chaves primárias, relacionamentos com chave estrangeira e cascatas definidas.
+- Evidência estrutural: `prisma/schema.prisma:20-113`.
+
+#### Risco potencial de precisão monetária
+
+- `Pedido.valorTotal`, `Pedido.descontoAplicado`, `Cupom.valor`, `Cupom.valorMinimo` e `Favorito.preco` utilizam `Float`.
+- O PostgreSQL confirmou `double precision` para esses campos.
+- Evidência: `prisma/schema.prisma:50-55`, `prisma/schema.prisma:82-83` e `prisma/schema.prisma:98`.
+- A integração não demonstrou uma divergência financeira real. Portanto, este achado é registrado como **risco técnico potencial de imprecisão**, não como perda monetária confirmada.
+- Grau de risco do achado potencial: **4 — Forte**.
+
+#### Limitações PC12
+
+- Não foram usados dados reais nem um volume PostgreSQL existente.
+- Não houve restauração ou contingência dinâmica.
+- Não foi confirmado uso dos JSON legados em ambiente de produção.
+- A coexistência de JSON permanece uma suspeita limitada ao uso demonstrado em seeds, não uma violação dinâmica de fonte única.
+- Evidência: `src/app/api/seed/route.ts:21-22` e `prisma/seed.ts:15-16`.
+
+#### Recomendação prioritária
+
+- Migrar valores financeiros de `Float` para `Decimal(10,2)` ou precisão equivalente.
+- Manter as restrições únicas e integridade referencial.
+- Confirmar PostgreSQL como única fonte de dados em produção.
+- Consolidar o histórico das migrations duplicadas de endereço.
+- Designar formalmente um responsável por administração do banco e publicar o dicionário de dados.
 
 ---
 
 ## 2. Modelo Pronto de Entrega para Enviar a José Inácio de Moraes Santos (Pessoa 7) até 17h00
 
-### Ponto de Controle `PC01` — Controle de Acesso Lógico às APIs e Endpoints Administrativos *(Grau de Risco: 5 – Muito forte)*
-- **Técnicas Aplicadas:** Análise do programa fonte (`middleware.js`, `seed/route.ts`, `create-admin/route.ts`), Simulação de acesso e Questionário (Q08).
-- **Análise Realizada:** Verificou-se a exigência de autorização de acesso aos dados em trânsito/teleprocessamento antes da leitura ou atualização do Banco de Dados (Slide 22, Deck 1).
-- **Problemas Encontrados:** O `middleware.js` restringe apenas `/protegido/*` e `/admin/*`, deixando 100% dos endpoints `/api/*` e `/api/v1/*` abertos a requisições anônimas para listar, alterar ou excluir clientes e pedidos. Adicionalmente, as rotas `/api/create-admin` e `/api/seed` permanecem expostas na aplicação web, sendo que `/api/seed` permite bypass caso `ADMIN_SECRET` esteja indefinido e expõe a senha padrão `admin123` no corpo JSON.
-- **Sugestões de Melhoria:** Implementar validação obrigatória de sessão e perfil (`RBAC` server-side) em todas as rotas `/api/*` e `/api/v1/*`, além de remover definitivamente os endpoints `/api/seed` e `/api/create-admin` do servidor web (restritos a scripts CLI locais).
+### Ponto de Controle `PC01` — Controle de Acesso Lógico às APIs e Endpoints Administrativos *(Grau de Risco: 5 — Muito forte)*
 
-### Ponto de Controle `PC05` — Gestão de Passwords, Sessões JWT/OAuth e Segurança em Redes *(Grau de Risco: 4 – Forte)*
-- **Técnicas Aplicadas:** Análise do programa fonte (`jwt.ts`, `jwt-token-provider.ts`, `auth.ts`), Simulação de força bruta e Questionário (Q07, Q09).
-- **Análise Realizada:** Avaliaram-se as normas de *passwords*, proteção criptográfica de tokens de sessão e protocolos de comunicação HTTPS/OAuth (Slides 22–23, Deck 1).
-- **Problemas Encontrados:** Existência de chaves secretas de fallback hardcoded no código (`dev_insecure_secret_change_me` e `default-secret-key`), ausência de regras mínimas de complexidade de senha e de *rate limiting* no login, coexistência desnecessária de três rotas distintas de login com tokens válidos por 7 dias sem mecanismo de revogação, e falta de verificação explícita de `email_verified` no vínculo OAuth.
-- **Sugestões de Melhoria:** Remover todo segredo hardcoded exigindo falha imediata de inicialização (*fail-fast*) caso faltem variáveis de ambiente, unificar autenticação exclusivamente via NextAuth sob HTTPS/TLS estrito, reduzir o tempo de vida do token, aplicar política de senha forte (mín. 8 caracteres) e *rate limit* por IP.
+- **Técnicas Aplicadas:** Análise estática, requisições HTTP reais em Next.js local e PostgreSQL temporário com dados fictícios.
+- **Análise Realizada:** Confirmou-se acesso anônimo a clientes e pedidos, atualização de cliente por objeto sem sessão, criação anônima de pedido, acesso administrativo anônimo e alteração administrativa de status.
+- **Problemas Encontrados:** APIs sensíveis não exigiram sessão nem perfil. `/api/seed` e `/api/create-admin` negaram segredo vazio ou inválido, mas permanecem expostas como rotas web.
+- **Sugestões de Melhoria:** Aplicar sessão e RBAC no servidor, validar propriedade do objeto e remover endpoints web de inicialização.
 
-### Ponto de Controle `PC12` — Administração de Banco de Dados, Unicidade e Eficiência de Arquivos *(Grau de Risco: 2 – Fraco)*
-- **Técnicas Aplicadas:** Inspeção do `schema.prisma`, histórico de `migrations/`, arquivos `/data` e Questionário (Q06, Q10).
-- **Análise Realizada:** Avaliou-se a governança do SGBD PostgreSQL, unicidade do dado, integridade referencial, criptografia de senhas em repouso e eficiência de organização dos arquivos (Slides 5 e 20, Deck 1).
-- **Problemas Encontrados:** Apesar da boa base estrutural (uso de Prisma ORM prevenindo SQL Injection e hash `bcrypt` com salt 10), identificou-se ausência de Dicionário de Dados formal e de responsável designado como Administrador de Dados (DBA), resíduos de arquivos planos `data/*.json` ferindo a unicidade, duas migrações repetidas de endereço e uso do tipo impreciso `Float` para valores monetários.
-- **Sugestões de Melhoria:** Designar formalmente um Administrador de Dados na equipe, publicar o Dicionário de Dados atualizado, eliminar arquivos JSON legados em favor da fonte única no PostgreSQL e converter todas as colunas financeiras de `Float` para `Decimal(10,2)`.
+### Ponto de Controle `PC05` — Gestão de Passwords, Sessões JWT/OAuth e Segurança em Redes *(Grau de Risco: 5 — Muito forte)*
+
+- **Técnicas Aplicadas:** Análise estática e integração local da biblioteca real de JWT e bcrypt.
+- **Análise Realizada:** Confirmou-se emissão JWT sem autenticação em `/api/jwt/login`; com `JWT_SECRET` ausente, o fallback foi utilizado. Login válido foi aceito, login inválido foi rejeitado e os hashes bcrypt foram validados no banco fictício.
+- **Limitações:** Não houve teste real de OAuth nem ataque de força bruta.
+- **Sugestões de Melhoria:** Remover `/api/jwt/login`, remover fallbacks e aplicar fail-fast, revogação, redução de validade e rate limiting.
+
+### Ponto de Controle `PC12` — Administração de Banco de Dados, Unicidade e Eficiência de Arquivos *(Grau de Risco: 2 — Fraco)*
+
+- **Técnicas Aplicadas:** Inspeção do `schema.prisma`, aplicação das migrations em PostgreSQL temporário e verificações com dados fictícios.
+- **Análise Realizada:** Confirmadas 8 migrations, 12 tabelas, unicidade de e-mail e cupom, integridade referencial e binding loopback. Confirmado também o uso de `Float`/`double precision` em valores financeiros.
+- **Limitações:** Não foi demonstrada uma divergência financeira efetiva, apenas o risco técnico de imprecisão.
+- **Sugestões de Melhoria:** Converter campos monetários para `Decimal(10,2)`, consolidar migrations duplicadas e confirmar fonte única de dados em produção.

@@ -1,0 +1,9 @@
+Branch: TPIII
+Data: 24/11/2026
+Aplicação: Next.js local limitado à interface loopback
+Banco: PostgreSQL 17 temporário limitado à interface loopback
+Volume persistente: não utilizado
+Dados: exclusivamente fictícios
+Seeds automáticos: não executados
+Migrations aplicadas: 8
+Observação: detalhes transitórios de portas e nomes de containers foram removidos desta cópia versionada.
