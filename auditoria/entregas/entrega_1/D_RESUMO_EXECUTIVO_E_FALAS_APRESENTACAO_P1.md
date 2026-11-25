@@ -8,7 +8,7 @@
 ## 1. Onde Encaixar Cada Arquivo da `entrega_1/` no PDF Final (`GRUPO_X.pdf`)
 
 1. **`A_PLANEJAMENTO_AMBIENTE_DFD_E_SUPERVISAO.md`** → Vai na **abertura técnica do relatório (Páginas 2 a 5)**: cobre o mapeamento do ambiente, os 2 DFDs, os objetivos/técnicas/custos/indicador de qualidade (`2,92h/PC`) e a Matriz Final Hierarquizada dos 12 Pontos de Controle já alinhada com os achados de todos os colegas.
-2. **`B_RELATORIO_DE_REDUCAO_DE_CUSTOS.md`** → Vai logo **após os 12 Pontos de Controle (Páginas 17 e 18)**: cumpre o Produto 3.3 da disciplina (economias financeiras, ROI de +627%, *payback* de 1,65 mês e ondas de priorização do PDI).
+2. **`B_RELATORIO_DE_REDUCAO_DE_CUSTOS.md`** → Vai logo **após os 12 Pontos de Controle (Páginas 17 e 18)**: cumpre o Produto 3.3 da disciplina (economias financeiras de R\$ 31.420/ano após engenharia, ROI de +627,6%, *payback* de 1,65 mês e ondas de priorização do PDI).
 3. **`C_CERTIFICADO_DE_CONTROLE_INTERNO.md`** → Vai no **fechamento nobre do relatório (Página 19)**: cumpre o Produto 3.2 (parecer formal do auditor indicando **Má Condição** atual com plano construtivo de saneamento em 22h).
 
 ---
